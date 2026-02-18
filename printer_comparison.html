@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Printer Comparison</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #0f1117; color: #e2e8f0; padding: 24px; }
+  h1 { text-align: center; font-size: 1.4rem; color: #94a3b8; margin-bottom: 6px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .subtitle { text-align: center; font-size: 0.8rem; color: #475569; margin-bottom: 24px; }
+
+  .legend { display: flex; gap: 16px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: #94a3b8; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 700px; }
+
+  thead tr { background: #1e2330; }
+  th { padding: 12px 14px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #64748b; text-align: left; border-bottom: 2px solid #2d3748; }
+  th.printer-col { text-align: center; font-size: 0.8rem; }
+
+  .th-bambu { color: #38bdf8; }
+  .th-prusa { color: #fb923c; }
+  .th-qidi { color: #a78bfa; }
+  .th-sovol { color: #4ade80; }
+
+  tbody tr { border-bottom: 1px solid #1e2330; transition: background 0.15s; }
+  tbody tr:hover { background: #1a1f2e; }
+
+  .section-header td { background: #161b27; color: #475569; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 8px 14px; border-top: 2px solid #2d3748; }
+
+  td { padding: 10px 14px; font-size: 0.82rem; vertical-align: middle; }
+  td.label { color: #94a3b8; font-weight: 600; white-space: nowrap; min-width: 160px; }
+  td.val { text-align: center; }
+
+  .badge { display: inline-block; padding: 3px 9px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; white-space: nowrap; }
+  .green  { background: #14532d; color: #4ade80; }
+  .yellow { background: #422006; color: #fbbf24; }
+  .red    { background: #450a0a; color: #f87171; }
+  .blue   { background: #0c2a4a; color: #38bdf8; }
+  .purple { background: #2e1065; color: #c4b5fd; }
+  .gray   { background: #1e293b; color: #94a3b8; }
+
+  .star { color: #fbbf24; }
+  .note { font-size: 0.7rem; color: #475569; display: block; margin-top: 2px; }
+
+  .verdict { margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+  .verdict-card { background: #1a1f2e; border-radius: 10px; padding: 16px; border-top: 3px solid; }
+  .verdict-card.bambu { border-color: #38bdf8; }
+  .verdict-card.prusa { border-color: #fb923c; }
+  .verdict-card.qidi  { border-color: #a78bfa; }
+  .verdict-card.sovol { border-color: #4ade80; }
+  .verdict-card h3 { font-size: 0.85rem; margin-bottom: 6px; }
+  .verdict-card .tag { font-size: 0.7rem; color: #64748b; margin-bottom: 8px; display: block; }
+  .verdict-card p { font-size: 0.75rem; color: #94a3b8; line-height: 1.5; }
+
+  .score-row td { padding-top: 12px; padding-bottom: 12px; background: #13161f; }
+  .score { font-size: 1.1rem; font-weight: 800; }
+  .score.bambu { color: #38bdf8; }
+  .score.prusa { color: #fb923c; }
+  .score.qidi  { color: #a78bfa; }
+  .score.sovol { color: #4ade80; }
+</style>
+</head>
+<body>
+
+<h1>3D Printer Comparison — 24/7 Production Focus</h1>
+<p class="subtitle">Bambu Lab H2S &nbsp;·&nbsp; Prusa XL &nbsp;·&nbsp; QIDI MAX4 &nbsp;·&nbsp; Sovol SV08 MAX</p>
+
+<div class="legend">
+  <div class="legend-item"><div class="dot" style="background:#4ade80"></div> Great</div>
+  <div class="legend-item"><div class="dot" style="background:#fbbf24"></div> Average</div>
+  <div class="legend-item"><div class="dot" style="background:#f87171"></div> Weak</div>
+</div>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th class="printer-col th-bambu">Bambu H2S</th>
+      <th class="printer-col th-prusa">Prusa XL</th>
+      <th class="printer-col th-qidi">QIDI MAX4</th>
+      <th class="printer-col th-sovol">Sovol SV08 MAX</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- PRICING -->
+    <tr class="section-header"><td colspan="5">💰 Pricing</td></tr>
+    <tr>
+      <td class="label">Base Price</td>
+      <td class="val">$1,249</td>
+      <td class="val">$2,199<span class="note">Single toolhead</span></td>
+      <td class="val">~$1,137</td>
+      <td class="val">~$700</td>
+    </tr>
+    <tr>
+      <td class="label">Full Production Config</td>
+      <td class="val">$1,499<span class="note">AMS Combo</span></td>
+      <td class="val">$3,999<span class="note">5-toolhead</span></td>
+      <td class="val">~$1,300<span class="note">w/ QIDI Box</span></td>
+      <td class="val">~$750</td>
+    </tr>
+    <tr>
+      <td class="label">Value for Money</td>
+      <td class="val"><span class="badge yellow">Good</span></td>
+      <td class="val"><span class="badge yellow">Average</span></td>
+      <td class="val"><span class="badge green">Excellent</span></td>
+      <td class="val"><span class="badge green">Best</span></td>
+    </tr>
+
+    <!-- BUILD VOLUME -->
+    <tr class="section-header"><td colspan="5">📐 Build Volume</td></tr>
+    <tr>
+      <td class="label">Build Volume</td>
+      <td class="val">340 × 320 × 340 mm</td>
+      <td class="val">360 × 360 × 360 mm</td>
+      <td class="val"><strong>390 × 390 × 340 mm</strong></td>
+      <td class="val"><strong>500 × 500 × 500 mm</strong></td>
+    </tr>
+    <tr>
+      <td class="label">Build Volume Rating</td>
+      <td class="val"><span class="badge yellow">Average</span></td>
+      <td class="val"><span class="badge green">Good</span></td>
+      <td class="val"><span class="badge green">Great</span></td>
+      <td class="val"><span class="badge green">Best</span></td>
+    </tr>
+    <tr>
+      <td class="label">Enclosed Chamber</td>
+      <td class="val"><span class="badge green">Yes — 65°C</span></td>
+      <td class="val"><span class="badge yellow">Optional add-on</span></td>
+      <td class="val"><span class="badge green">Yes — 65°C</span></td>
+      <td class="val"><span class="badge red">No — Open frame</span></td>
+    </tr>
+
+    <!-- SPEED & PERFORMANCE -->
+    <tr class="section-header"><td colspan="5">⚡ Speed & Performance</td></tr>
+    <tr>
+      <td class="label">Max Tool Head Speed</td>
+      <td class="val">1,000 mm/s</td>
+      <td class="val">400 mm/s</td>
+      <td class="val">800 mm/s</td>
+      <td class="val">700 mm/s</td>
+    </tr>
+    <tr>
+      <td class="label">Max Acceleration</td>
+      <td class="val">20,000 mm/s²</td>
+      <td class="val">10,000 mm/s²</td>
+      <td class="val"><strong>30,000 mm/s²</strong></td>
+      <td class="val">20,000 mm/s²</td>
+    </tr>
+    <tr>
+      <td class="label">Motion System</td>
+      <td class="val">CoreXY</td>
+      <td class="val">CoreXY</td>
+      <td class="val">CoreXY</td>
+      <td class="val">CoreXY</td>
+    </tr>
+    <tr>
+      <td class="label">Motor Precision</td>
+      <td class="val"><span class="badge green">Servo PMSM</span></td>
+      <td class="val"><span class="badge yellow">Stepper</span></td>
+      <td class="val"><span class="badge green">Closed-loop XY</span></td>
+      <td class="val"><span class="badge yellow">Stepper</span></td>
+    </tr>
+    <tr>
+      <td class="label">Speed Rating</td>
+      <td class="val"><span class="badge green">Best</span></td>
+      <td class="val"><span class="badge red">Slowest</span></td>
+      <td class="val"><span class="badge green">Great</span></td>
+      <td class="val"><span class="badge green">Good</span></td>
+    </tr>
+
+    <!-- PRINT QUALITY -->
+    <tr class="section-header"><td colspan="5">🎯 Print Quality & Precision</td></tr>
+    <tr>
+      <td class="label">Auto Bed Leveling</td>
+      <td class="val"><span class="badge green">Yes — Advanced</span></td>
+      <td class="val"><span class="badge green">Yes — Load cell</span></td>
+      <td class="val"><span class="badge green">Yes — Nozzle contact</span></td>
+      <td class="val"><span class="badge green">Yes — Eddy current</span></td>
+    </tr>
+    <tr>
+      <td class="label">Motion Accuracy</td>
+      <td class="val"><span class="badge green">≤50 µm (Vision Encoder opt.)</span></td>
+      <td class="val"><span class="badge green">0.2 mm</span></td>
+      <td class="val"><span class="badge green">High (closed-loop)</span></td>
+      <td class="val"><span class="badge yellow">Standard</span></td>
+    </tr>
+    <tr>
+      <td class="label">Vibration Compensation</td>
+      <td class="val"><span class="badge green">Yes — Active</span></td>
+      <td class="val"><span class="badge green">Yes</span></td>
+      <td class="val"><span class="badge green">Yes</span></td>
+      <td class="val"><span class="badge green">Yes — Input shaping</span></td>
+    </tr>
+    <tr>
+      <td class="label">Long Print Reliability</td>
+      <td class="val"><span class="badge green">Great</span></td>
+      <td class="val"><span class="badge green">Excellent</span></td>
+      <td class="val"><span class="badge green">Good</span></td>
+      <td class="val"><span class="badge yellow">Average</span></td>
+    </tr>
+
+    <!-- MATERIALS -->
+    <tr class="section-header"><td colspan="5">🧪 Materials</td></tr>
+    <tr>
+      <td class="label">Max Nozzle Temp</td>
+      <td class="val">350°C</td>
+      <td class="val">290°C<span class="note">HT hotend: 500°C optional</span></td>
+      <td class="val">370°C</td>
+      <td class="val">300°C</td>
+    </tr>
+    <tr>
+      <td class="label">Max Bed Temp</td>
+      <td class="val">120°C</td>
+      <td class="val">120°C</td>
+      <td class="val">120°C</td>
+      <td class="val">110°C</td>
+    </tr>
+    <tr>
+      <td class="label">Engineering Filaments</td>
+      <td class="val"><span class="badge green">PLA/PETG/ABS/ASA/PC/PA/PPS + CF</span></td>
+      <td class="val"><span class="badge green">PLA/PETG/ABS/ASA/PA + composites</span></td>
+      <td class="val"><span class="badge green">PLA/PETG/ABS/ASA/PC/PA/PPS-CF</span></td>
+      <td class="val"><span class="badge yellow">PLA/PETG/ABS/TPU</span></td>
+    </tr>
+    <tr>
+      <td class="label">Abrasive Material Support</td>
+      <td class="val"><span class="badge green">Yes — Hardened nozzle</span></td>
+      <td class="val"><span class="badge green">Yes</span></td>
+      <td class="val"><span class="badge green">Yes — Hardened steel</span></td>
+      <td class="val"><span class="badge yellow">Limited</span></td>
+    </tr>
+
+    <!-- MULTI-MATERIAL -->
+    <tr class="section-header"><td colspan="5">🎨 Multi-Material / Multi-Color</td></tr>
+    <tr>
+      <td class="label">System</td>
+      <td class="val">AMS 2 Pro<span class="note">Up to 4 spools per unit</span></td>
+      <td class="val">Tool Changer<span class="note">Up to 5 independent heads</span></td>
+      <td class="val">QIDI Box<span class="note">AMS-style, sold separately</span></td>
+      <td class="val"><span class="badge red">None available</span></td>
+    </tr>
+    <tr>
+      <td class="label">Filament Waste / Purging</td>
+      <td class="val"><span class="badge yellow">Moderate — poop chute</span></td>
+      <td class="val"><span class="badge green">None — no purge needed</span></td>
+      <td class="val"><span class="badge yellow">Moderate</span></td>
+      <td class="val"><span class="badge gray">N/A</span></td>
+    </tr>
+    <tr>
+      <td class="label">Max Colors / Materials</td>
+      <td class="val">Up to 24<span class="note">with multiple AMS units</span></td>
+      <td class="val">5<span class="note">different materials simultaneously</span></td>
+      <td class="val">4<span class="note">with QIDI Box</span></td>
+      <td class="val"><span class="badge red">Single material</span></td>
+    </tr>
+
+    <!-- 24/7 PRODUCTION -->
+    <tr class="section-header"><td colspan="5">🏭 24/7 Production & Reliability</td></tr>
+    <tr>
+      <td class="label">AI / Failure Detection</td>
+      <td class="val"><span class="badge green">Yes — 3 cameras + 23 sensors</span></td>
+      <td class="val"><span class="badge yellow">No native AI camera</span></td>
+      <td class="val"><span class="badge green">Yes — AI camera</span></td>
+      <td class="val"><span class="badge yellow">Basic only</span></td>
+    </tr>
+    <tr>
+      <td class="label">Clog Prevention</td>
+      <td class="val"><span class="badge green">Servo motor detection</span></td>
+      <td class="val"><span class="badge yellow">Filament sensor only</span></td>
+      <td class="val"><span class="badge green">Polar Cooler system</span></td>
+      <td class="val"><span class="badge yellow">Basic sensor</span></td>
+    </tr>
+    <tr>
+      <td class="label">Offline Printing</td>
+      <td class="val"><span class="badge green">Yes</span></td>
+      <td class="val"><span class="badge green">Yes</span></td>
+      <td class="val"><span class="badge green">Yes — USB</span></td>
+      <td class="val"><span class="badge green">Yes</span></td>
+    </tr>
+    <tr>
+      <td class="label">Remote Monitoring</td>
+      <td class="val"><span class="badge green">Yes — Bambu app + cloud</span></td>
+      <td class="val"><span class="badge green">Yes — Prusa Connect</span></td>
+      <td class="val"><span class="badge green">Yes — QIDI Cloud / LAN</span></td>
+      <td class="val"><span class="badge yellow">Basic — LAN only</span></td>
+    </tr>
+    <tr>
+      <td class="label">Noise Level</td>
+      <td class="val">&lt;50 dB</td>
+      <td class="val">~45 dB</td>
+      <td class="val">~45 dB</td>
+      <td class="val">~50 dB</td>
+    </tr>
+
+    <!-- REPAIRABILITY -->
+    <tr class="section-header"><td colspan="5">🔧 Repairability & Maintenance</td></tr>
+    <tr>
+      <td class="label">Firmware</td>
+      <td class="val"><span class="badge yellow">Proprietary</span></td>
+      <td class="val"><span class="badge green">Open source</span></td>
+      <td class="val"><span class="badge green">Klipper</span></td>
+      <td class="val"><span class="badge green">Klipper</span></td>
+    </tr>
+    <tr>
+      <td class="label">Slicer Compatibility</td>
+      <td class="val">Bambu Studio<span class="note">OrcaSlicer / PrusaSlicer limited</span></td>
+      <td class="val">PrusaSlicer<span class="note">+ most slicers</span></td>
+      <td class="val">QIDI Studio / OrcaSlicer / PrusaSlicer</td>
+      <td class="val">OrcaSlicer / PrusaSlicer / Cura</td>
+    </tr>
+    <tr>
+      <td class="label">Parts Availability</td>
+      <td class="val"><span class="badge yellow">Proprietary — Bambu only</span></td>
+      <td class="val"><span class="badge green">Excellent — global</span></td>
+      <td class="val"><span class="badge yellow">Good — QIDI store</span></td>
+      <td class="val"><span class="badge green">Good — standard parts</span></td>
+    </tr>
+    <tr>
+      <td class="label">DIY Repairability</td>
+      <td class="val"><span class="badge yellow">Moderate</span></td>
+      <td class="val"><span class="badge green">Excellent</span></td>
+      <td class="val"><span class="badge green">Good — Klipper community</span></td>
+      <td class="val"><span class="badge green">Good — Klipper community</span></td>
+    </tr>
+    <tr>
+      <td class="label">Community & Documentation</td>
+      <td class="val"><span class="badge green">Large — fast growing</span></td>
+      <td class="val"><span class="badge green">Massive — best in class</span></td>
+      <td class="val"><span class="badge yellow">Medium</span></td>
+      <td class="val"><span class="badge yellow">Medium</span></td>
+    </tr>
+
+    <!-- SUPPORT -->
+    <tr class="section-header"><td colspan="5">🎧 Manufacturer Support</td></tr>
+    <tr>
+      <td class="label">Response Time</td>
+      <td class="val"><span class="badge green">Fast — 24–48h</span></td>
+      <td class="val"><span class="badge green">Fast — 24–48h</span></td>
+      <td class="val"><span class="badge green">Fast — usually &lt;24h</span></td>
+      <td class="val"><span class="badge yellow">Average — 48–72h</span></td>
+    </tr>
+    <tr>
+      <td class="label">Warranty</td>
+      <td class="val">1 year</td>
+      <td class="val">2 years</td>
+      <td class="val">1 year</td>
+      <td class="val">1 year</td>
+    </tr>
+    <tr>
+      <td class="label">Replacement Parts Policy</td>
+      <td class="val"><span class="badge yellow">Good but can be expensive</span></td>
+      <td class="val"><span class="badge green">Excellent</span></td>
+      <td class="val"><span class="badge green">Very generous — free shipping on faulty parts</span></td>
+      <td class="val"><span class="badge yellow">Average</span></td>
+    </tr>
+    <tr>
+      <td class="label">Support Channel</td>
+      <td class="val">App / Email / Chat</td>
+      <td class="val">Email / Forum / Wiki</td>
+      <td class="val">Email / Ticket</td>
+      <td class="val">Email / Ticket</td>
+    </tr>
+    <tr>
+      <td class="label">Overall Support Rating</td>
+      <td class="val"><span class="badge green">Good</span></td>
+      <td class="val"><span class="badge green">Best in class</span></td>
+      <td class="val"><span class="badge green">Good</span></td>
+      <td class="val"><span class="badge yellow">Average</span></td>
+    </tr>
+
+    <!-- ECOSYSTEM -->
+    <tr class="section-header"><td colspan="5">🔌 Ecosystem & Integration</td></tr>
+    <tr>
+      <td class="label">Fleet Management</td>
+      <td class="val"><span class="badge green">Yes — Bambu Cloud</span></td>
+      <td class="val"><span class="badge green">Yes — Prusa Connect</span></td>
+      <td class="val"><span class="badge yellow">Basic — QIDI Cloud</span></td>
+      <td class="val"><span class="badge red">No</span></td>
+    </tr>
+    <tr>
+      <td class="label">Compatibility w/ your H2D</td>
+      <td class="val"><span class="badge green">Same ecosystem — shares parts, AMS, slicer</span></td>
+      <td class="val"><span class="badge gray">Different ecosystem</span></td>
+      <td class="val"><span class="badge gray">Different ecosystem</span></td>
+      <td class="val"><span class="badge gray">Different ecosystem</span></td>
+    </tr>
+    <tr>
+      <td class="label">Maturity / Track Record</td>
+      <td class="val"><span class="badge green">Proven — H2D lineage</span></td>
+      <td class="val"><span class="badge green">Excellent — years of use</span></td>
+      <td class="val"><span class="badge yellow">New — launched Nov 2025</span></td>
+      <td class="val"><span class="badge yellow">Limited long-term data</span></td>
+    </tr>
+
+    <!-- OVERALL SCORE -->
+    <tr class="section-header"><td colspan="5">⭐ Overall Score for 24/7 Large-Format Production</td></tr>
+    <tr class="score-row">
+      <td class="label" style="color:#e2e8f0; font-weight:800;">Score</td>
+      <td class="val"><span class="score bambu">8.2 / 10</span></td>
+      <td class="val"><span class="score prusa">8.5 / 10</span></td>
+      <td class="val"><span class="score qidi">8.4 / 10</span></td>
+      <td class="val"><span class="score sovol">6.5 / 10</span></td>
+    </tr>
+    <tr>
+      <td class="label" style="color:#e2e8f0;">Best For</td>
+      <td class="val" style="font-size:0.75rem; color:#94a3b8;">Speed + Bambu ecosystem integration</td>
+      <td class="val" style="font-size:0.75rem; color:#94a3b8;">Long-term reliability + multi-material</td>
+      <td class="val" style="font-size:0.75rem; color:#94a3b8;">Largest volume + best price-to-performance</td>
+      <td class="val" style="font-size:0.75rem; color:#94a3b8;">Maximum raw volume on a budget</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="verdict">
+  <div class="verdict-card bambu">
+    <h3 style="color:#38bdf8">Bambu Lab H2S</h3>
+    <span class="tag">Best if: You're already in the Bambu ecosystem</span>
+    <p>Fastest printer of the group, excellent AI monitoring, and shares parts/AMS/slicer with your existing H2D. The easiest plug-and-play experience. Weaker on volume and long-term repairability vs the others.</p>
+  </div>
+  <div class="verdict-card prusa">
+    <h3 style="color:#fb923c">Prusa XL</h3>
+    <span class="tag">Best if: Multi-material + zero waste is critical</span>
+    <p>Unmatched reliability track record, best support and documentation, open-source, and the only true tool-changer here. Slowest and most expensive. Built to run in production farms 24/7 — Prusa itself uses 700+ of them.</p>
+  </div>
+  <div class="verdict-card qidi">
+    <h3 style="color:#a78bfa">QIDI MAX4</h3>
+    <span class="tag">Best if: Volume + budget is the top priority</span>
+    <p>Largest enclosed build volume in the group, great specs, Klipper-based, closed-loop motors for 24/7 stability, and by far the best price-to-performance ratio. Main risk: it's very new — Nov 2025 launch — so long-term reliability is unproven.</p>
+  </div>
+  <div class="verdict-card sovol">
+    <h3 style="color:#4ade80">Sovol SV08 MAX</h3>
+    <span class="tag">Best if: Raw size is all that matters</span>
+    <p>500³mm is truly massive and the price is unbeatable. However, open frame means no enclosed chamber — bad for ABS/ASA/PA in a 24/7 scenario. Not recommended as a primary production machine for engineering filaments.</p>
+  </div>
+</div>
+
+</body>
+</html>
